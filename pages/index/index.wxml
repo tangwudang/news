@@ -17,7 +17,7 @@
         <view class="banner_content">
           <view class="banner_title">{{news_banner.title}}</view>
           <view class="banner_desc">
-            <view class="banner_source">{{news_banner.source}}</view>
+            <view class="banner_source">{{news_banner.source || defaultBanner.source}}</view>
             <view class="banner_date">{{news_banner.date}}</view>
           </view>
         </view>
@@ -32,7 +32,7 @@
           <view class="item_left">
             <view class="item_title">{{item.title}}</view>
             <view class="item_desc">
-              <view class="item_source">{{item.source}}</view>
+              <view class="item_source">{{item.source || defaultBanner.source}}</view>
               <view class="item_date">{{item.date}}</view>
             </view>
           </view>

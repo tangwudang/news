@@ -42,7 +42,7 @@ const defaultBanner = {
   id:'',
   firstImage: '/images/default_banner.jpeg',
   title: '新冠堪比二战，世界格局重塑，小国任人摆布',
-  source: '东方资讯',
+  source: '未知来源',
   date: '20:08'
 }
 

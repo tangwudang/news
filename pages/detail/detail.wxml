@@ -7,7 +7,7 @@
   <!-- 描述-->
   <view class="detail_desc">
     <view class="detail_source">
-      <view class="source">{{news_detail.source}}</view>
+      <view class="source">{{news_detail.source || '未知来源'}}</view>
       <view class="date">{{news_detail.date}}</view>
     </view>
     <view class="detail_read_count">
