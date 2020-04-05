@@ -1,21 +1,96 @@
-/**index.wxss**/
-.userinfo {
+/**新闻tabs**/
+.news_tabs{
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 100%;
+  height: 80rpx;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.news_tab{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  background: #30C1DF;
+  justify-content: center;
 }
 
-.userinfo-nickname {
-  color: #aaa;
+.news_tab_text{
+  width: 120rpx;
+  text-align: center;
+  color: #fff;
 }
 
-.usermotto {
-  margin-top: 200px;
+.news_tab_line{
+  position: absolute;
+  width: 30%;
+  height: 5rpx;
+  background: white;
+  bottom: 0;
+  margin-bottom: 10rpx;
+}
+
+/** 新闻banner **/
+.news_banner{
+  position: relative;
+}
+
+.banner_image{
+  width: 100%;
+  height: 400rpx;
+}
+
+.banner_content{
+  position: absolute;
+  bottom: 0;
+  margin: 25rpx;
+}
+
+.banner_title{
+  color: white;
+}
+
+.banner_desc{
+  display: flex;
+  color:darkgray;
+  font-size: 30rpx;
+  line-height: 42rpx;
+}
+
+.banner_source{
+  margin-right: 40rpx;
+}
+
+/** 新闻列表 **/
+.news_item{
+  height: 240rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+.item_content{
+  display: flex;
+  justify-content: space-around;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+}
+.item_left{
+  flex: 1;
+  margin-right: 20rpx;
+}
+.item_right{
+  width: 160rpx;
+  height: 160rpx;
+}
+.item_desc{
+  display: flex;
+  color:darkgray;
+  font-size: 30rpx;
+  line-height: 42rpx;
+  margin-top: 5rpx;
+}
+.item_source{
+  margin-right: 30rpx;
+}
+.news_line{
+  width: 100%;
+  height: 1rpx;
+  background: darkgray;
 }

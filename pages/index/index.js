@@ -1,54 +1,99 @@
-//index.js
-//获取应用实例
-const app = getApp()
+const util = require('../../utils/util.js')
+
+const news_tabs = [
+  {
+    position: 0,
+    title: "国内",
+    type: "gn"
+  },
+  {
+    position: 1,
+    title: "国际",
+    type: "gj"
+  },
+  {
+    position: 2,
+    title: "财经",
+    type: "cj"
+  },
+  {
+    position: 3,
+    title: "娱乐",
+    type: "yl"
+  },
+  {
+    position: 4,
+    title: "军事",
+    type: "js"
+  },
+  {
+    position: 5,
+    title: "体育",
+    type: "ty"
+  },
+  {
+    postion: 6,
+    title: "其他",
+    type: "other"
+  }
+]
+
+const defaultBanner = {
+  firstImage: '/images/default_banner.jpeg',
+  title: '新冠堪比二战，世界格局重塑，小国任人摆布',
+  source: '东方资讯',
+  date: '20:08'
+}
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    defaultBanner: defaultBanner,
+    news_tabs: news_tabs,
+    cur_tab: 0,
+    news_banner: defaultBanner,
+    news_items : []
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
+  
   onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+    this.getNewsList()
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+
+  onPullDownRefresh(){
+    this.getNewsList(() => {
+      wx.stopPullDownRefresh()
     })
+  },
+
+  getNewsList(callBack){
+    wx.request({
+      url: 'https://test-miniprogram.com/api/news/list',
+      data: {
+        type: news_tabs[this.data.cur_tab].type
+      },
+      success: res => {
+        console.log("getNewsList", res)
+        let result = res.data.result
+        for (let i = 0; i < result.length; i++){
+          result[i].date = util.formatTime(result[i].date)
+        }
+      
+        this.setData({
+          news_banner: result[0],
+          news_items: result.slice(1)    
+        })
+      },
+      complete: () => {
+          callBack && callBack()
+      }
+    })
+  },
+
+  onTitleClick: function (event){
+    console.log("onTitleClick", event)
+    let id = event.currentTarget.id
+    this.setData({
+      cur_tab : id
+    })
+    this.getNewsList()
   }
 })

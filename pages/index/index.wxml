@@ -1,13 +1,45 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<!-- 新闻分类tab-->
+<scroll-view scroll-x>
+  <view class="news_tabs">
+    <view class="news_tab" wx:for="{{news_tabs}}" wx:key="xxxxe" bindtap="onTitleClick" id="{{index}}">
+      <view class="news_tab_text">{{item.title}}</view>
+      <view class="news_tab_line" wx:if="{{cur_tab == item.position}}"></view>
+    </view>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+</scroll-view>
+
+<!-- 新闻内容-->
+<view class="news_content">
+  <!-- 新闻banner-->
+  <view class="news_banner">
+      <image class="banner_image" src="{{news_banner.firstImage == '' ? defaultBanner.firstImage : news_banner.firstImage}}"></image>
+      <view class="banner_content">
+        <view class="banner_title">{{news_banner.title}}</view>
+        <view class="banner_desc">
+          <view class="banner_source">{{news_banner.source}}</view>
+          <view class="banner_date">{{news_banner.date}}</view>
+        </view>
+      </view>
   </view>
+
+  <!-- 新闻列表-->
+  <view wx:for="{{news_items}}" wx:key="index">
+    <view class="news_item">
+      <navigator url="/pages/detail/detail?id={{item.id}}">
+        <view class="item_content">
+          <view class="item_left">
+            <view class="item_title">{{item.title}}</view>
+            <view class="item_desc">
+              <view class="item_source">{{item.source}}</view>
+              <view class="item_date">{{item.date}}</view>
+            </view>
+          </view>
+          <image class="item_right" src="{{item.firstImage == '' ? defaultBanner.firstImage : item.firstImage}}"></image>
+        </view>
+      </navigator>
+
+      <view class="news_line"></view>
+    </view>
+  </view>
+
 </view>

@@ -1,4 +1,4 @@
-const formatTime = date => {
+const formatDate = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -7,6 +7,14 @@ const formatTime = date => {
   const second = date.getSeconds()
 
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+
+const formatTime = date => {
+  let newDate = new Date(date)
+  let hour = newDate.getHours()
+  let minute = newDate.getMinutes()
+
+  return [hour, minute].map(formatNumber).join(':')
 }
 
 const formatNumber = n => {
