@@ -67,7 +67,7 @@
 }
 .item_content{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding-top: 30rpx;
   padding-bottom: 30rpx;
 }

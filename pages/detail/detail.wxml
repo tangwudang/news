@@ -1,2 +1,27 @@
 <!--pages/detail/detail.wxml-->
-<text>pages/detail/detail.wxml</text>
+<view class="title_line"></view>
+
+<view class="news_detail">
+  <!-- 标题-->
+  <view class="detail_title">{{news_detail.title}}</view>
+  <!-- 描述-->
+  <view class="detail_desc">
+    <view class="detail_source">
+      <view class="source">{{news_detail.source}}</view>
+      <view class="date">{{news_detail.date}}</view>
+    </view>
+    <view class="detail_read_count">
+      <view class="read_text">阅读</view>
+      <view class="read_count">{{news_detail.readCount}}</view>
+    </view>
+  </view>
+  <!-- 内容-->
+  <view wx:for="{{detail_content}}" wx:key="index">
+    <view wx:if="{{item.type == 'image'}}">
+      <image class="content_image" src="{{item.src}}"></image>
+    </view>
+    <view wx:else>
+      <view class="content_text">{{item.text}}</view>
+    </view>
+  </view>
+</view>
